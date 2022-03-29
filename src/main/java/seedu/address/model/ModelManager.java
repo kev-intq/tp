@@ -253,6 +253,18 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void unmarkAttendanceForClass(Tutorial tutorial, int week) {
+        requireAllNonNull(tutorial, week);
+        addressBook.unmarkAttendanceForClass(tutorial, week);
+    }
+
+    @Override
+    public void unmarkAttendanceForStudent(Tutorial tutorial, NusNetId studentId, int week) {
+        requireAllNonNull(tutorial, studentId, week);
+        addressBook.unmarkAttendanceForStudent(tutorial, studentId, week);
+    }
+
+    @Override
     public void updateFilteredAttendanceList(Tutorial tutorial, NusNetId studentId) {
         requireAllNonNull(tutorial);
         ObservableList<Attendance> attendanceList = FXCollections.observableArrayList();

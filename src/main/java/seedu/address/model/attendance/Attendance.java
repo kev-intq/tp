@@ -63,6 +63,16 @@ public class Attendance implements Displayable {
         attendanceList.set(index, 1);
     }
 
+    /**
+     * Unmarks attendance for a particular week.
+     *
+     * @param week The week to unmark the attendance for.
+     */
+    public void unmarkWeek(int week) {
+        int index = week - 1;
+        attendanceList.set(index, 0);
+    }
+
     @Override
     public DisplayType getDisplayType() {
         return displayType;

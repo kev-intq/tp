@@ -364,7 +364,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         Person toReplaceStudent = new Person(student.getName(), student.getPhone(), student.getEmail(),
                 student.getAddress(), student.getTags());
         persons.setPerson(student, toReplaceStudent);
-
+        tutorials.getTutorialWithName(student.getTutorialName()).generateAttendance();
     }
 
     /// filteredPersons-level methods
@@ -415,5 +415,21 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void markAttendanceForStudent(Tutorial tutorial, NusNetId studentId, int week) {
         requireAllNonNull(tutorial, studentId, week);
         tutorial.markStudentAttendance(studentId, week);
+    }
+
+    /**
+     * Unmarks attendance for the specific week for all students in the specified tutorial
+     */
+    public void unmarkAttendanceForClass(Tutorial tutorial, int week) {
+        requireAllNonNull(tutorial, week);
+        tutorial.unmarkAllAttendance(week);
+    }
+
+    /**
+     * Unmarks attendance for the specific week for the specified student in the specified tutorial
+     */
+    public void unmarkAttendanceForStudent(Tutorial tutorial, NusNetId studentId, int week) {
+        requireAllNonNull(tutorial, studentId, week);
+        tutorial.unmarkStudentAttendance(studentId, week);
     }
 }

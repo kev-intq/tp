@@ -70,6 +70,12 @@ public class AttendanceList {
                                 new Comment("")));
             }
         }
+
+        for (Attendance attendance : attendances) {
+            if (!uniqueStudentList.containsStudentWithId(attendance.getStudentId())) {
+                attendances.remove(attendance);
+            }
+        }
     }
 
     /**
@@ -114,6 +120,32 @@ public class AttendanceList {
         for (Attendance attendance : attendances) {
             if (attendance.getStudentId().equals(studentId)) {
                 attendance.markWeek(week);
+                break;
+            }
+        }
+    }
+
+    /**
+     * Unmarks the attendance for the all students.
+     *
+     * @param week the week that the attendance should be unmarked for the student.
+     */
+    public void unmarkAllAttendance(int week) {
+        for (Attendance attendance : attendances) {
+            attendance.unmarkWeek(week);
+        }
+    }
+
+    /**
+     * Unmarks the attendance for the specified student.
+     *
+     * @param studentId the NusNetId of a student.
+     * @param week the week that the attendance should be unmarked for the student.
+     */
+    public void unmarkAttendanceForStudent(NusNetId studentId, int week) {
+        for (Attendance attendance : attendances) {
+            if (attendance.getStudentId().equals(studentId)) {
+                attendance.unmarkWeek(week);
                 break;
             }
         }

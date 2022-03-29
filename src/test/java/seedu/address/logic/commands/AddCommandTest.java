@@ -321,6 +321,17 @@ public class AddCommandTest {
         }
 
         @Override
+        public void unmarkAttendanceForClass(Tutorial tutorial, int week) {
+            throw new AssertionError("This method should not be called.");
+
+        }
+
+        @Override
+        public void unmarkAttendanceForStudent(Tutorial tutorial, NusNetId studentId, int week) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasTutorialWithName(TutorialName tutorialName) {
             throw new AssertionError("This method should not be called.");
         }

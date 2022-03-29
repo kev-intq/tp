@@ -28,6 +28,7 @@ import seedu.address.logic.commands.ListScoreCommand;
 import seedu.address.logic.commands.ListStudentCommand;
 import seedu.address.logic.commands.MarkAttendanceCommand;
 import seedu.address.logic.commands.RemoveStudentCommand;
+import seedu.address.logic.commands.UnmarkAttendanceCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -119,6 +120,9 @@ public class AddressBookParser {
 
         case MarkAttendanceCommand.COMMAND_WORD:
             return new MarkAttendanceCommandParser().parse(arguments);
+
+        case UnmarkAttendanceCommand.COMMAND_WORD:
+            return new UnmarkAttendanceCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

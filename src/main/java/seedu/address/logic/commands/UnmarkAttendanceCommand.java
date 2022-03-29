@@ -12,10 +12,10 @@ import seedu.address.model.person.NusNetId;
 import seedu.address.model.tutorial.Tutorial;
 import seedu.address.model.tutorial.TutorialName;
 
-public class MarkAttendanceCommand extends Command {
-    public static final String COMMAND_WORD = "mark_attendance";
+public class UnmarkAttendanceCommand extends Command {
+    public static final String COMMAND_WORD = "unmark_attendance";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks attendances for a class or specific person. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unmarks attendances for a class or specific person. "
             + "Parameters: "
             + PREFIX_TUTORIALNAME + "TUTORIAL NAME "
             + PREFIX_STUDENTID + "STUDENT ID "
@@ -25,21 +25,21 @@ public class MarkAttendanceCommand extends Command {
             + PREFIX_STUDENTID + "e01234567 "
             + PREFIX_WEEK + "7 ";
 
-    public static final String MESSAGE_MULTIPLE_SUCCESS = "Attendance marked for all students on week %s";
-    public static final String MESSAGE_SUCCESS = "Attendance marked for student %s on week %s";
+    public static final String MESSAGE_MULTIPLE_SUCCESS = "Attendance unmarked for all students on week %s";
+    public static final String MESSAGE_SUCCESS = "Attendance unmarked for student %s on week %s";
     public static final String MESSAGE_STUDENT_NOT_IN_CLASS = "The specified student does not exist in this tutorial.";
 
-    private final boolean isMarkMultipleAttendances;
+    private final boolean isUnmarkMultipleAttendances;
     private final TutorialName tutorialToMark;
     private final NusNetId studentToMark;
     private final int week;
 
     /**
-     * Creates an MarkAttendanceCommand to mark attendance the specified {@code Tutorial}
+     * Creates an UnmarkAttendanceCommand to unmark attendance the specified {@code Tutorial}
      */
-    public MarkAttendanceCommand(TutorialName tutorial, NusNetId studentId, int week,
-                                 boolean isMarkMultipleAttendances) {
-        this.isMarkMultipleAttendances = isMarkMultipleAttendances;
+    public UnmarkAttendanceCommand(TutorialName tutorial, NusNetId studentId, int week,
+                                   boolean isUnmarkMultipleAttendances) {
+        this.isUnmarkMultipleAttendances = isUnmarkMultipleAttendances;
         tutorialToMark = tutorial;
         studentToMark = studentId;
         this.week = week;
@@ -55,14 +55,14 @@ public class MarkAttendanceCommand extends Command {
 
         Tutorial tutorial = model.getTutorialWithName(tutorialToMark);
 
-        if (!isMarkMultipleAttendances) {
+        if (!isUnmarkMultipleAttendances) {
             if (!tutorial.containsStudentWithId(studentToMark)) {
                 throw new CommandException(MESSAGE_STUDENT_NOT_IN_CLASS);
             }
-            model.markAttendanceForStudent(tutorial, studentToMark, week);
+            model.unmarkAttendanceForStudent(tutorial, studentToMark, week);
             return new CommandResult(String.format(MESSAGE_SUCCESS, studentToMark, week));
         } else {
-            model.markAttendanceForClass(tutorial, week);
+            model.unmarkAttendanceForClass(tutorial, week);
             return new CommandResult(String.format(MESSAGE_MULTIPLE_SUCCESS, week));
         }
     }

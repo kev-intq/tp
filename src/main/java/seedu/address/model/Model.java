@@ -260,6 +260,10 @@ public interface Model {
 
     void markAttendanceForStudent(Tutorial tutorial, NusNetId studentId, int week);
 
+    void unmarkAttendanceForClass(Tutorial tutorial, int week);
+
+    void unmarkAttendanceForStudent(Tutorial tutorial, NusNetId studentId, int week);
+
     /**
      * Updates the filter of the filtered tutorial list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
