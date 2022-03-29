@@ -26,6 +26,7 @@ import seedu.address.model.assessment.Assessment;
 import seedu.address.model.assessment.AssessmentName;
 import seedu.address.model.assessment.Score;
 import seedu.address.model.assessment.StudentResult;
+import seedu.address.model.attendance.Attendance;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NusNetId;
 import seedu.address.model.person.Person;
@@ -255,6 +256,16 @@ public class AddCommandTest {
 
         @Override
         public TutorialName getTutorialNameOfStudent(Name studentName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Attendance> getFilteredAttendanceList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredAttendanceList(Tutorial tutorial, NusNetId studentId) {
             throw new AssertionError("This method should not be called.");
         }
 

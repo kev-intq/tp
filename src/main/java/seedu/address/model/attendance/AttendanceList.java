@@ -73,6 +73,27 @@ public class AttendanceList {
     }
 
     /**
+     * Returns the attendance of the specified student for the semester.
+     *
+     * @param studentId the NusNetId of a student.
+     * @return the attendance list of the student for the semester.
+     */
+    public ArrayList<Attendance> getAttendancesByStudentID(NusNetId studentId) {
+        Attendance attendanceToAdd = null;
+        ArrayList<Attendance> attendanceList = new ArrayList<>();
+        for (Attendance attendance : attendances) {
+            if (attendance.getStudentId().equals(studentId)) {
+                attendanceToAdd = attendance;
+                break;
+            }
+        }
+        for (int i = 0; i < weeks; i++) {
+            attendanceList.add(attendanceToAdd);
+        }
+        return attendanceList;
+    }
+
+    /**
      * Marks the attendance for the all students.
      *
      * @param week the week that the attendance should be marked for the student.

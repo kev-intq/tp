@@ -4,12 +4,17 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 
+import seedu.address.model.DisplayType;
+import seedu.address.model.Displayable;
 import seedu.address.model.person.NusNetId;
 
 /**
  * Contains a list of the attendance for a particular Student.
  */
-public class Attendance {
+public class Attendance implements Displayable {
+
+    private static final DisplayType displayType = DisplayType.ATTENDANCE;
+
     private final ArrayList<Integer> attendanceList;
     private final NusNetId studentId;
     private final Comment comment;
@@ -40,6 +45,14 @@ public class Attendance {
         return comment;
     }
 
+    public String getAttendanceStatusByWeek(int week) {
+        int index = week - 1;
+        if (attendanceList.get(index).equals(0)) {
+            return "Status: Absent";
+        }
+        return "Status: Present";
+    }
+
     /**
      * Marks attendance for a particular week.
      *
@@ -48,6 +61,11 @@ public class Attendance {
     public void markWeek(int week) {
         int index = week - 1;
         attendanceList.set(index, 1);
+    }
+
+    @Override
+    public DisplayType getDisplayType() {
+        return displayType;
     }
 
     @Override

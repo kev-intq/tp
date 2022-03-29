@@ -2,7 +2,7 @@
 layout: page
 title: User Guide
 ---
-camNUS is a **desktop app** for Teaching Assistants (TAs) to **manage their own contacts, as well as assessments and class participation among students** in their contact book. It is **optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
+Greetings, TAs of NUS! camNUS is a **desktop app** for Teaching Assistants (TAs) to **manage their own contacts, as well as assessments and class participation among students** in their contact book. It is **optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
 * Table of Contents
 {:toc}
@@ -171,8 +171,8 @@ Format:
 
 * `list_student INDEX [tn/TUTORIAL_NAME]`
 * `TUTORIAL_NAME` is optional if `INDEX` is given.
-* Shows list of student belonging to the class at the specified `INDEX`.
-* Shows list of student belonging to the class with the specified `TUTORIAL_NAME`.
+* Shows list of all students belonging to the class at the specified `INDEX`.
+* Shows list of all students belonging to the class with the specified `TUTORIAL_NAME`.
 * The index refers to the index number shown in the displayed person list.
 * The index must be a positive integer 1, 2, 3, …​
 
@@ -192,6 +192,25 @@ Examples:
 
 * list_score as/Assignment 1 tn/T04
   ![result for `list_score as/Assignment 1 tn/T04`](images/listScoreResult.png)
+
+#### Listing attendance of a class: `list_attendance`
+
+Generates the attendance list of a specified class, or a specified student.
+
+Format: 
+1. `list_attendance tn/TUTORIAL_NAME wk/WEEK`
+   * `TUTORIAL_NAME` refers to the name of an existing tutorial group.
+   * Shows attendance of all students belonging to the class with the specified `TUTORIAL_NAME`.
+2. `list_attendance id/STUDENT_ID`
+   * `STUDENT_ID` refers to the student's unique NUSNET ID.
+   * Shows attendance of student with specified `STUDENT_ID`.
+
+Examples:
+
+* `list_attendance tn/T04 wk/2`
+  ![result for `list_attendance tn/T04 wk/2`](images/listAttendance.png)
+* `list_attendance id/e0123456`
+  ![result for `list_attendance id/e0123456`](images/listAttendanceByStudent.png)
 
 ### Editing a person : `edit`
 
@@ -294,6 +313,29 @@ Examples:
 * `delete_assessment as/Attendance`
 * `delete_assessment as/Assignment 1`
 
+### Assigning assessment score to a student: `grade`
+
+Assigns a score to a student in a specified assessment component.
+
+Format: `grade as/ASSESSMENT_NAME n/NAME s/SCORE`
+
+Example: `grade as/Test 1 n/Amy Tan s/5`
+
+### Marking attendance for a student: `mark_attendance`
+
+Marks attendance for a specified student or all students in a specified class for a specified week. 
+
+Format: `mark_attendance tn/TUTORIAL_NAME [id/STUDENT_ID] wk/WEEK`
+
+* `STUDENT_ID` is optional.
+* `STUDENT_ID` refers to the student's unique NUSNET ID.
+* `TUTORIAL_NAME` refers to the name of the tutorial group the student is assigned to.
+
+Examples:
+
+* `mark_attendance tn/T04 id/e0123456 wk/1`
+* `mark_attendance tn/T04 wk/1`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -348,6 +390,9 @@ _Details coming soon ..._
 | **Find**              | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                             |
 | **List**              | `list`                                                                                                                                                                 |
 | **List Assessment**   | `list_assessment`                                                                                                                                                      |
+| **List Attendance**   | `list_attendance tn/TUTORIAL_NAME wk/WEEK` <br> e.g., `list_attendance tn/T04 wk/1`                                                                                    |
 | **List Class**        | `list_class [d/DAY]` <br> e.g., `list_class d/Wed`                                                                                                                     |
 | **List Student**      | `list_student INDEX [tn/TUTORIAL_NAME]` <br> e.g., `list_student 1 [tn/G04]`                                                                                           |
+| **Grade**             | `grade as/ASSESSMENT_NAME n/NAME s/SCORE` <br> e.g., `grade as/Test 1 n/Amy Tan s/5`                                                                                   |
+| **Mark Attendance**   | `mark_attendance tn/TUTORIAL_NAME [id/STUDENT_ID] wk/WEEK` <br> e.g., `mark_attendance tn/T04 id/e0123456 wk/1`                                                        |
 | **Help**              | `help [n/COMMAND_NAME]` <br> e.g.,`help n/delete`                                                                                                                      |

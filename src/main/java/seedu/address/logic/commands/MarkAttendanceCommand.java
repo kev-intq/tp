@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_TUTORIAL_NOT_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALNAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -18,9 +19,11 @@ public class MarkAttendanceCommand extends Command {
             + "Parameters: "
             + PREFIX_TUTORIALNAME + "TUTORIAL NAME "
             + PREFIX_STUDENTID + "STUDENT ID "
+            + PREFIX_WEEK + "WEEK "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TUTORIALNAME + "T04 "
-            + PREFIX_STUDENTID + "e01234567 ";
+            + PREFIX_STUDENTID + "e01234567 "
+            + PREFIX_WEEK + "7 ";
 
     public static final String MESSAGE_SUCCESS = "Attendance marked for student %s on week %s";
     public static final String MESSAGE_STUDENT_NOT_IN_CLASS = "The specified student does not exist in this tutorial.";
@@ -55,9 +58,9 @@ public class MarkAttendanceCommand extends Command {
             if (!tutorial.containsStudentWithId(studentToMark)) {
                 throw new CommandException(MESSAGE_STUDENT_NOT_IN_CLASS);
             }
-            model.markAttendanceForClass(tutorial, week);
-        } else {
             model.markAttendanceForStudent(tutorial, studentToMark, week);
+        } else {
+            model.markAttendanceForClass(tutorial, week);
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, studentToMark, week));

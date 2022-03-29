@@ -25,6 +25,9 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** The week of the attendance requested. */
+    private int attendanceWeek;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
@@ -85,8 +88,32 @@ public class CommandResult {
         return new CommandResult(feedbackToUser, false, false, DisplayType.ASSESSMENT);
     }
 
+    /**
+     * Constructs and returns a {@code CommandResult} with the specified {@code feedbackToUser}
+     * and other fields set to their default value for score related commands.
+     */
     public static CommandResult createScoreCommandResult(String feedbackToUser) {
         return new CommandResult(feedbackToUser, false, false, DisplayType.SCORE);
+    }
+
+    /**
+     * Constructs and returns a {@code CommandResult} with the specified {@code feedbackToUser}
+     * and other fields set to their default value for attendance related commands.
+     */
+    public static CommandResult createAttendanceCommandResult(String feedbackToUser) {
+        return new CommandResult(feedbackToUser, false, false, DisplayType.ATTENDANCE);
+    }
+
+    /**
+     * Constructs and returns a {@code CommandResult} with the specified {@code feedbackToUser}
+     * and other fields set to their default value for attendance related commands.
+     */
+    public static CommandResult createAttendanceByStudentCommandResult(String feedbackToUser) {
+        return new CommandResult(feedbackToUser, false, false, DisplayType.ATTENDANCE_BY_STUDENT);
+    }
+
+    public void setAttendanceWeek(int week) {
+        attendanceWeek = week;
     }
 
     public String getFeedbackToUser() {
@@ -95,6 +122,10 @@ public class CommandResult {
 
     public String getInquiry() {
         return showHelpCommandWord;
+    }
+
+    public int getAttendanceWeek() {
+        return attendanceWeek;
     }
 
     public boolean isShowHelp() {

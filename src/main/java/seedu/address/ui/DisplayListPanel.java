@@ -13,12 +13,14 @@ import seedu.address.model.DisplayType;
 import seedu.address.model.Displayable;
 import seedu.address.model.assessment.Assessment;
 import seedu.address.model.assessment.StudentResult;
+import seedu.address.model.attendance.Attendance;
 import seedu.address.model.person.Person;
 import seedu.address.model.tutorial.Tutorial;
 
 public class DisplayListPanel extends UiPart<Region> {
     private static final String FXML = "DisplayListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(DisplayListPanel.class);
+    private int attendanceWeek;
 
     @FXML
     private ListView<Displayable> displayListView;
@@ -32,6 +34,13 @@ public class DisplayListPanel extends UiPart<Region> {
         inputList.setAll(displayList);
         displayListView.setItems(inputList);
         displayListView.setCellFactory(listView -> new DisplayListPanel.DisplayListViewCell());
+    }
+
+    /**
+     * Sets the week of attendance in query for display.
+     */
+    public void setAttendanceWeek(int week) {
+        attendanceWeek = week;
     }
 
     /**
@@ -53,6 +62,10 @@ public class DisplayListPanel extends UiPart<Region> {
                 setGraphic(new AssessmentCard((Assessment) item, getIndex() + 1).getRoot());
             } else if (item.getDisplayType() == DisplayType.SCORE) {
                 setGraphic(new StudentResultCard((StudentResult) item, getIndex() + 1).getRoot());
+            } else if (item.getDisplayType() == DisplayType.ATTENDANCE && attendanceWeek == 0) {
+                setGraphic(new AttendanceByStudentCard((Attendance) item, getIndex() + 1).getRoot());
+            } else if (item.getDisplayType() == DisplayType.ATTENDANCE) {
+                setGraphic(new AttendanceCard((Attendance) item, getIndex() + 1, attendanceWeek).getRoot());
             } else {
                 setGraphic(new PersonCard((Person) item, getIndex() + 1).getRoot());
             }

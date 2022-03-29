@@ -11,6 +11,7 @@ import seedu.address.model.assessment.Assessment;
 import seedu.address.model.assessment.AssessmentName;
 import seedu.address.model.assessment.Score;
 import seedu.address.model.assessment.StudentResult;
+import seedu.address.model.attendance.Attendance;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NusNetId;
 import seedu.address.model.person.Person;
@@ -258,4 +259,14 @@ public interface Model {
     void markAttendanceForClass(Tutorial tutorial, int week);
 
     void markAttendanceForStudent(Tutorial tutorial, NusNetId studentId, int week);
+
+    /**
+     * Updates the filter of the filtered tutorial list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredAttendanceList(Tutorial tutorial, NusNetId studentId);
+
+    /** Returns an unmodifiable view of the attendance list */
+    ObservableList<Attendance> getFilteredAttendanceList();
+
 }

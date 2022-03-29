@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
@@ -17,6 +18,7 @@ import seedu.address.model.assessment.AssessmentName;
 import seedu.address.model.assessment.AssessmentResults;
 import seedu.address.model.assessment.Score;
 import seedu.address.model.assessment.StudentResult;
+import seedu.address.model.attendance.Attendance;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NusNetId;
 import seedu.address.model.person.Person;
@@ -40,6 +42,7 @@ public class ModelManager implements Model {
     private final FilteredList<Assessment> filteredAssessments;
     private final FilteredList<Person> filteredPersonsByMultiplePredicate;
 
+    private ObservableList<Attendance> displayAttendanceList;
     private ObservableList<StudentResult> displayAssessmentResults;
 
     /**
@@ -247,6 +250,23 @@ public class ModelManager implements Model {
     public void markAttendanceForStudent(Tutorial tutorial, NusNetId studentId, int week) {
         requireAllNonNull(tutorial, studentId, week);
         addressBook.markAttendanceForStudent(tutorial, studentId, week);
+    }
+
+    @Override
+    public void updateFilteredAttendanceList(Tutorial tutorial, NusNetId studentId) {
+        requireAllNonNull(tutorial);
+        ObservableList<Attendance> attendanceList = FXCollections.observableArrayList();
+        if (studentId != null) {
+            attendanceList.setAll(tutorial.getAttendanceList().getAttendancesByStudentID(studentId));
+        } else {
+            attendanceList.setAll(tutorial.getAttendanceList().getAttendances());
+        }
+        displayAttendanceList = attendanceList;
+    }
+
+    @Override
+    public ObservableList<Attendance> getFilteredAttendanceList() {
+        return displayAttendanceList;
     }
 
     @Override
